@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aadhar Properties – Greater Noida</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --yellow:   #F5A623;
+      --yellow-lt:#FFD98A;
+      --orange:   #E8650A;
+      --orange-dk:#C4500A;
+      --white:    #FFFFFF;
+      --off-white:#FFF9F0;
+      --charcoal: #1A1A1A;
+      --mid:      #5A5240;
+      --light:    #F7F0E6;
+      --red:      #E0190D;
+      --green:    #25D366;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--charcoal);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 70px;
+      background: transparent;
+      border-bottom: none;
+      box-shadow: none;
+      transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--yellow);
+      box-shadow: 0 2px 20px rgba(232,101,10,0.12);
+    }
+    nav.scrolled .logo-text { color: #2AAEDE; text-shadow: 0 0 12px rgba(42,174,222,0.3); }
+    nav.scrolled .logo-sub { color: var(--orange); }
+    nav.scrolled ul a { color: var(--mid); }
+    nav.scrolled ul a:hover { color: var(--orange); }
+    nav.scrolled .nav-link-pill { border-color: rgba(232,101,10,0.25); }
+    nav.scrolled .nav-link-pill:hover { background: var(--orange); color: white; border-color: var(--orange); }
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .logo-icon {
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, var(--yellow), var(--orange));
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; color: white; font-weight: 700;
+    }
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: #5BC8F5;
+      line-height: 1.1;
+      text-shadow: 0 0 18px rgba(91,200,245,0.55), 0 2px 8px rgba(0,0,0,0.35);
+      letter-spacing: 0.01em;
+    }
+    .logo-sub {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--yellow-lt);
+      text-transform: uppercase;
+    }
+    nav ul {
+      list-style: none;
+      display: flex; gap: 0.5rem; align-items: center;
+    }
+    nav ul a {
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.9);
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--yellow-lt); }
+    .nav-link-pill {
+      display: inline-block;
+      padding: 0.38rem 1rem;
+      border-radius: 999px;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.92) !important;
+      font-size: 0.82rem !important;
+      font-weight: 500 !important;
+      transition: background 0.2s, border-color 0.2s, color 0.2s !important;
+    }
+    .nav-link-pill:hover {
+      background: rgba(255,255,255,0.18) !important;
+      border-color: rgba(255,255,255,0.7) !important;
+      color: white !important;
+    }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--yellow), var(--orange));
+      color: white !important;
+      padding: 0.45rem 1.25rem;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: opacity 0.2s !important;
+    }
+    .nav-cta:hover { opacity: 0.88; color: white !important; }
+
+    /* ─── HERO ────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 120px 5% 80px;
+      position: relative;
+      overflow: hidden;
+      background: #1A1A1A;
+    }
+    .hero-video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: transparent;
+      z-index: 1;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1.5' fill='rgba(255,255,255,0.05)'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 2;
+    }
+    .hero-content { max-width: 640px; position: relative; z-index: 3; }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.35);
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+      font-weight: 700;
+      color: white;
+      line-height: 1.15;
+      margin-bottom: 1.4rem;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.7), 0 1px 4px rgba(0,0,0,0.5);
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--yellow-lt);
+    }
+    .hero p {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.95);
+      line-height: 1.75;
+      margin-bottom: 2.2rem;
+      max-width: 520px;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.6);
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: white;
+      color: var(--orange);
+      font-weight: 700;
+      font-size: 0.92rem;
+      padding: 0.85rem 1.8rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: transform 0.18s, box-shadow 0.18s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.25); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 2px solid rgba(255,255,255,0.6);
+      color: white;
+      font-weight: 600;
+      font-size: 0.92rem;
+      padding: 0.85rem 1.8rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.18s;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.12); }
+    .hero-stats {
+      position: absolute; bottom: 0; right: 0; z-index: 3;
+      display: flex;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(255,255,255,0.15);
+      border-left: 1px solid rgba(255,255,255,0.15);
+      border-radius: 16px 0 0 0;
+      overflow: hidden;
+    }
+    .stat-item {
+      padding: 1.4rem 2rem;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 700; color: var(--yellow-lt);
+    }
+    .stat-lbl { font-size: 0.72rem; color: rgba(255,255,255,0.7); margin-top: 2px; }
+
+    /* ─── TICKER ──────────────────────────────────────── */
+    .ticker {
+      background: linear-gradient(90deg, var(--orange), var(--orange-dk));
+      color: white;
+      padding: 0.65rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .ticker-inner {
+      display: inline-flex; gap: 4rem;
+      animation: ticker 28s linear infinite;
+    }
+    .ticker-inner span { font-size: 0.82rem; font-weight: 500; }
+    .ticker-inner span::before { content: '◆  '; color: var(--yellow-lt); }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ─── SERVICES ────────────────────────────────────── */
+    .services {
+      background: var(--off-white);
+      padding: 90px 5%;
+    }
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .section-tag {
+      display: inline-block;
+      color: var(--orange);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-bottom: 2px solid var(--yellow);
+      padding-bottom: 4px;
+      margin-bottom: 0.9rem;
+    }
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--charcoal);
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .service-card {
+      background: white;
+      border-radius: 14px;
+      padding: 2rem 1.8rem;
+      border: 1px solid rgba(245,166,35,0.15);
+      transition: transform 0.22s, box-shadow 0.22s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--yellow), var(--orange));
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    .service-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(232,101,10,0.12); }
+    .service-card:hover::after { transform: scaleX(1); }
+    .service-icon {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, var(--yellow-lt), var(--yellow));
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.2rem;
+    }
+    .service-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 600;
+      margin-bottom: 0.65rem;
+      color: var(--charcoal);
+    }
+    .service-card p {
+      font-size: 0.875rem;
+      color: var(--mid);
+      line-height: 1.7;
+    }
+
+    /* ─── ABOUT ───────────────────────────────────────── */
+    .about {
+      padding: 90px 5%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-img-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      height: 460px;
+      background: linear-gradient(160deg, var(--yellow) 0%, var(--orange-dk) 100%);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .about-building-svg {
+      width: 80%; opacity: 0.92;
+    }
+    .about-badge {
+      position: absolute; bottom: -20px; right: -20px;
+      background: white;
+      border-radius: 14px;
+      padding: 1.2rem 1.5rem;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+      text-align: center;
+      min-width: 140px;
+    }
+    .about-badge-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem; font-weight: 700;
+      color: var(--orange);
+    }
+    .about-badge-lbl { font-size: 0.75rem; color: var(--mid); margin-top: 2px; }
+    .about-content .section-header { text-align: left; }
+    .about-content p {
+      font-size: 0.95rem;
+      color: var(--mid);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .owner-card {
+      margin-top: 1.8rem;
+      display: flex; align-items: center; gap: 1.2rem;
+      background: var(--light);
+      border-radius: 12px;
+      padding: 1.2rem 1.5rem;
+      border-left: 4px solid var(--orange);
+    }
+    .owner-avatar {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--yellow), var(--orange));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; color: white; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .owner-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; }
+    .owner-title { font-size: 0.78rem; color: var(--orange); font-weight: 500; margin-top: 2px; }
+
+    /* ─── HIGHLIGHT STRIP ────────────────────────────── */
+    .highlight {
+      background: linear-gradient(135deg, var(--yellow), var(--orange));
+      padding: 60px 5%;
+      text-align: center;
+    }
+    .highlight h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      color: white; font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+    .highlight p { color: rgba(255,255,255,0.85); font-size: 1rem; margin-bottom: 2rem; }
+    .highlight-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .btn-white {
+      background: white; color: var(--orange);
+      font-weight: 700; font-size: 0.92rem;
+      padding: 0.85rem 2rem; border-radius: 8px;
+      text-decoration: none;
+      transition: transform 0.18s, box-shadow 0.18s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
+    .btn-outline-white {
+      border: 2px solid white; color: white;
+      font-weight: 600; font-size: 0.92rem;
+      padding: 0.85rem 2rem; border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.18s;
+    }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.15); }
+
+    /* ─── LOCATIONS ───────────────────────────────────── */
+    .locations {
+      padding: 90px 5%;
+      background: var(--off-white);
+    }
+    .locations-inner { max-width: 1100px; margin: 0 auto; }
+    .loc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem; margin-top: 2.5rem;
+    }
+    .loc-item {
+      background: white;
+      border-radius: 10px;
+      padding: 1.2rem 1.4rem;
+      display: flex; align-items: center; gap: 0.8rem;
+      border: 1px solid rgba(245,166,35,0.2);
+      font-size: 0.9rem; font-weight: 500; color: var(--charcoal);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .loc-item:hover { border-color: var(--orange); box-shadow: 0 4px 16px rgba(232,101,10,0.1); }
+    .loc-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--orange); flex-shrink: 0; }
+
+    /* ─── CONTACT ─────────────────────────────────────── */
+    .contact {
+      padding: 90px 5%;
+      max-width: 900px; margin: 0 auto;
+    }
+    .contact .section-header { text-align: center; margin-bottom: 3rem; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .contact-card {
+      background: white;
+      border: 1px solid rgba(245,166,35,0.25);
+      border-radius: 14px;
+      padding: 2rem;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .contact-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(232,101,10,0.1); }
+    .contact-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+    .contact-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; margin-bottom: 0.5rem; color: var(--charcoal);
+    }
+    .contact-card p, .contact-card a {
+      font-size: 0.88rem; color: var(--mid); line-height: 1.65; text-decoration: none;
+    }
+    .contact-card a:hover { color: var(--orange); }
+    .contact-card.full { grid-column: 1 / -1; }
+
+    /* ─── FOOTER ──────────────────────────────────────── */
+    footer {
+      background: var(--charcoal);
+      color: rgba(255,255,255,0.65);
+      padding: 40px 5% 28px;
+      display: flex;
+      align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    footer .logo-text { color: white; }
+    footer .logo-sub { color: var(--yellow-lt); }
+    .footer-copy { font-size: 0.78rem; text-align: right; }
+    .footer-copy span { color: var(--yellow); }
+    .footer-links { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+    .footer-links a {
+      font-size: 0.8rem; color: rgba(255,255,255,0.55);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--yellow); }
+
+    /* ─── FLOATING BUTTONS ────────────────────────────── */
+    .float-btns {
+      position: fixed; right: 0; top: 50%;
+      transform: translateY(-50%);
+      display: flex; flex-direction: column; gap: 10px;
+      z-index: 999;
+    }
+    .float-btn {
+      display: flex; align-items: center; gap: 10px;
+      padding: 0 20px 0 16px;
+      height: 48px;
+      border-radius: 999px 0 0 999px;
+      text-decoration: none;
+      color: white;
+      font-size: 0.82rem;
+      font-weight: 700;
+      white-space: nowrap;
+      box-shadow: -3px 3px 18px rgba(0,0,0,0.25);
+      transform: translateX(calc(100% - 48px));
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+      letter-spacing: 0.02em;
+    }
+    .float-btn:hover {
+      transform: translateX(0);
+      box-shadow: -5px 5px 24px rgba(0,0,0,0.32);
+    }
+    .float-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
+    .float-call { background: var(--red); }
+    .float-wa   { background: var(--green); }
+
+    /* ─── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      .hero-stats { display: none; }
+      .about { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-visual { order: -1; }
+      .about-img-wrap { height: 280px; }
+      .about-badge { bottom: -14px; right: -10px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .contact-card.full { grid-column: auto; }
+      footer { flex-direction: column; align-items: flex-start; }
+      .footer-copy { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="nav-logo">
+    <div class="logo-icon">A</div>
+    <div>
+      <div class="logo-text">Aadhar Properties</div>
+      <div class="logo-sub">Greater Noida • Since 2008</div>
+    </div>
+  </div>
+  <ul>
+    <li><a href="#services" class="nav-link-pill">Services</a></li>
+    <li><a href="#about" class="nav-link-pill">About Us</a></li>
+    <li><a href="#locations" class="nav-link-pill">Locations</a></li>
+    <li><a href="#contact" class="nav-link-pill">Contact</a></li>
+    <li><a href="tel:+919811563006" class="nav-cta">📞 Call Now</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto"
+         aria-hidden="true">
+    <source src="Drone_viewing_residential_plots_20260911142023.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay" aria-hidden="true"></div>
+</section>
+
+<!-- ─── TICKER ─── -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner">
+    <span>Residential Plots in Alpha 1 &amp; 2</span>
+    <span>Builder Floors — Greater Noida West</span>
+    <span>Commercial Spaces — Tradex Tower</span>
+    <span>Premium Apartments — Noida Extension</span>
+    <span>Agricultural Land — NCR Region</span>
+    <span>Ready to Move Flats</span>
+    <span>Residential Plots in Alpha 1 &amp; 2</span>
+    <span>Builder Floors — Greater Noida West</span>
+    <span>Commercial Spaces — Tradex Tower</span>
+    <span>Premium Apartments — Noida Extension</span>
+    <span>Agricultural Land — NCR Region</span>
+    <span>Ready to Move Flats</span>
+  </div>
+</div>
+
+<!-- ─── SERVICES ─── -->
+<section class="services" id="services">
+  <div class="section-header">
+    <div class="section-tag">What We Offer</div>
+    <h2>Real Estate Services Tailored for You</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🏠</div>
+      <h3>Residential Properties</h3>
+      <p>From cozy builder floors to spacious independent houses — we help families find the perfect home in Greater Noida's most sought-after sectors.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏢</div>
+      <h3>Commercial Spaces</h3>
+      <p>Office units, retail shops, and showroom spaces in prime commercial belts including Tradex Tower and Omaxe Connaught Place, Greater Noida.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌿</div>
+      <h3>Plots &amp; Land</h3>
+      <p>GNIDA-approved residential and commercial plots across Alpha, Beta, Gamma, Delta, and Zeta sectors — verified titles, transparent process.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏗️</div>
+      <h3>Under-Construction Projects</h3>
+      <p>Exclusive tie-ups with top builders for pre-launch and early-investor pricing on premium township projects in Greater Noida West.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔑</div>
+      <h3>Rental &amp; Leasing</h3>
+      <p>Short and long-term rental arrangements for residential and commercial units — managed with complete documentation and tenant verification.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📋</div>
+      <h3>Property Consulting</h3>
+      <p>Market valuation, legal guidance, home loan assistance, and end-to-end support — from property search to registry and possession.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section id="about" style="background:white;">
+  <div class="about">
+    <div class="about-visual">
+      <div class="about-img-wrap">
+        <!-- Illustrated building SVG in brand colors -->
+        <svg class="about-building-svg" viewBox="0 0 320 380" xmlns="http://www.w3.org/2000/svg">
+          <!-- Sky -->
+          <rect width="320" height="380" fill="none"/>
+          <!-- Main building body -->
+          <rect x="60" y="100" width="200" height="260" rx="4" fill="rgba(255,255,255,0.18)"/>
+          <!-- Windows grid -->
+          <g fill="rgba(255,255,255,0.55)">
+            <rect x="80" y="125" width="30" height="22" rx="2"/>
+            <rect x="125" y="125" width="30" height="22" rx="2"/>
+            <rect x="170" y="125" width="30" height="22" rx="2"/>
+            <rect x="215" y="125" width="30" height="22" rx="2"/>
+            <rect x="80" y="165" width="30" height="22" rx="2"/>
+            <rect x="125" y="165" width="30" height="22" rx="2"/>
+            <rect x="170" y="165" width="30" height="22" rx="2"/>
+            <rect x="215" y="165" width="30" height="22" rx="2"/>
+            <rect x="80" y="205" width="30" height="22" rx="2"/>
+            <rect x="125" y="205" width="30" height="22" rx="2"/>
+            <rect x="170" y="205" width="30" height="22" rx="2"/>
+            <rect x="215" y="205" width="30" height="22" rx="2"/>
+            <rect x="80" y="245" width="30" height="22" rx="2"/>
+            <rect x="125" y="245" width="30" height="22" rx="2"/>
+            <rect x="170" y="245" width="30" height="22" rx="2"/>
+            <rect x="215" y="245" width="30" height="22" rx="2"/>
+          </g>
+          <!-- Door -->
+          <rect x="130" y="305" width="60" height="55" rx="4" fill="rgba(255,255,255,0.3)"/>
+          <circle cx="160" cy="332" r="4" fill="rgba(255,255,255,0.8)"/>
+          <!-- Rooftop element -->
+          <rect x="110" y="68" width="100" height="34" rx="4" fill="rgba(255,255,255,0.25)"/>
+          <rect x="145" y="42" width="30" height="28" rx="3" fill="rgba(255,255,255,0.2)"/>
+          <!-- House icon small left -->
+          <g transform="translate(10, 220)">
+            <rect x="0" y="20" width="42" height="30" rx="2" fill="rgba(255,255,255,0.15)"/>
+            <polygon points="21,0 42,20 0,20" fill="rgba(255,255,255,0.25)"/>
+          </g>
+          <!-- House icon small right -->
+          <g transform="translate(268, 220)">
+            <rect x="0" y="20" width="42" height="30" rx="2" fill="rgba(255,255,255,0.15)"/>
+            <polygon points="21,0 42,20 0,20" fill="rgba(255,255,255,0.25)"/>
+          </g>
+          <!-- Ground line -->
+          <rect x="0" y="358" width="320" height="22" rx="0" fill="rgba(0,0,0,0.12)"/>
+          <!-- Trees -->
+          <circle cx="30" cy="340" r="18" fill="rgba(255,255,255,0.12)"/>
+          <circle cx="290" cy="340" r="18" fill="rgba(255,255,255,0.12)"/>
+          <rect x="26" y="345" width="8" height="15" rx="2" fill="rgba(0,0,0,0.1)"/>
+          <rect x="286" y="345" width="8" height="15" rx="2" fill="rgba(0,0,0,0.1)"/>
+          <!-- Brand text on building -->
+          <text x="160" y="90" font-family="serif" font-size="11" fill="rgba(255,255,255,0.9)" text-anchor="middle" font-weight="bold">AADHAR PROPERTIES</text>
+          <!-- Stars/dots accent -->
+          <circle cx="50" cy="40" r="3" fill="rgba(255,255,255,0.4)"/>
+          <circle cx="275" cy="60" r="2" fill="rgba(255,255,255,0.4)"/>
+          <circle cx="290" cy="30" r="4" fill="rgba(255,255,255,0.3)"/>
+          <circle cx="30" cy="70" r="2.5" fill="rgba(255,255,255,0.3)"/>
+        </svg>
+      </div>
+      <div class="about-badge">
+        <div class="about-badge-num">15+</div>
+        <div class="about-badge-lbl">Years of Trust</div>
+      </div>
+    </div>
+    <div class="about-content">
+      <div class="section-header">
+        <div class="section-tag">About Us</div>
+        <h2>Greater Noida's Trusted Property Partner</h2>
+      </div>
+      <p>Aadhar Properties has been a cornerstone of Greater Noida's real estate landscape for over 15 years. We understand the city — its sectors, its growth corridors, its builders, and its bylaws — better than anyone else.</p>
+      <p>Whether you're a first-time buyer navigating GNIDA's allotment process or an investor looking for high-yield commercial space, we offer honest guidance with zero pressure tactics. Our reputation is built entirely on repeat clients and word-of-mouth referrals.</p>
+      <p>We are conveniently located at Tradex Tower 2 in the Commercial Belt, Alpha 1st — one of Greater Noida's most accessible business addresses.</p>
+      <div class="owner-card">
+        <div class="owner-avatar">AP</div>
+        <div>
+          <div class="owner-name">Mr. Akash Pandit</div>
+          <div class="owner-title">Owner &amp; Principal Consultant</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── HIGHLIGHT STRIP ─── -->
+<section class="highlight">
+  <h2>Ready to Buy, Sell, or Invest?</h2>
+  <p>Call us today for a free consultation. No obligation, just honest advice.</p>
+  <div class="highlight-actions">
+    <a href="tel:+919811563006" class="btn-white">📞 +91 98115 63006</a>
+    <a href="https://wa.me/919811563006?text=Hi%20Mr.%20Akash%2C%20I%20am%20interested%20in%20a%20property%20in%20Greater%20Noida" target="_blank" class="btn-outline-white">💬 WhatsApp Us</a>
+  </div>
+</section>
+
+<!-- ─── LOCATIONS ─── -->
+<section class="locations" id="locations">
+  <div class="locations-inner">
+    <div class="section-header" style="text-align:center">
+      <div class="section-tag">Areas We Cover</div>
+      <h2>Properties Across Greater Noida &amp; NCR</h2>
+    </div>
+    <div class="loc-grid">
+      <div class="loc-item"><span class="loc-dot"></span>Alpha 1 &amp; Alpha 2</div>
+      <div class="loc-item"><span class="loc-dot"></span>Beta 1 &amp; Beta 2</div>
+      <div class="loc-item"><span class="loc-dot"></span>Gamma 1 &amp; Gamma 2</div>
+      <div class="loc-item"><span class="loc-dot"></span>Delta 1, 2 &amp; 3</div>
+      <div class="loc-item"><span class="loc-dot"></span>Zeta 1 &amp; Zeta 2</div>
+      <div class="loc-item"><span class="loc-dot"></span>Omicron 1 &amp; 2</div>
+      <div class="loc-item"><span class="loc-dot"></span>Greater Noida West</div>
+      <div class="loc-item"><span class="loc-dot"></span>Noida Extension</div>
+      <div class="loc-item"><span class="loc-dot"></span>Sector 150, Noida</div>
+      <div class="loc-item"><span class="loc-dot"></span>Yamuna Expressway</div>
+      <div class="loc-item"><span class="loc-dot"></span>Knowledge Park</div>
+      <div class="loc-item"><span class="loc-dot"></span>Tech Zone IV</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section class="contact" id="contact">
+  <div class="section-header">
+    <div class="section-tag">Get In Touch</div>
+    <h2>We're Right Here for You</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="contact-icon">📞</div>
+      <h4>Call Us</h4>
+      <p><a href="tel:+919811563006">+91 98115 63006</a></p>
+      <p style="margin-top:0.3rem; font-size:0.78rem;">Mon – Sat, 9 AM – 7 PM</p>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">💬</div>
+      <h4>WhatsApp</h4>
+      <p><a href="https://wa.me/919811563006?text=Hi%20Mr.%20Akash%2C%20I%20need%20property%20assistance" target="_blank">Chat with Mr. Akash</a></p>
+      <p style="margin-top:0.3rem; font-size:0.78rem;">Quick replies, usually within an hour</p>
+    </div>
+    <div class="contact-card full">
+      <div class="contact-icon">📍</div>
+      <h4>Visit Our Office</h4>
+      <p>First Floor, Tradex Tower 2, Commercial Belt<br/>Alpha 1st, Greater Noida, Uttar Pradesh</p>
+      <a href="https://maps.google.com/?q=Tradex+Tower+2+Alpha+1+Greater+Noida" target="_blank" style="display:inline-block; margin-top:0.9rem; color:var(--orange); font-weight:600; font-size:0.85rem;">🗺️ Get Directions</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="nav-logo">
+    <div class="logo-icon">A</div>
+    <div>
+      <div class="logo-text">Aadhar Properties</div>
+      <div class="logo-sub">Greater Noida • NCR</div>
+    </div>
+  </div>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#locations">Locations</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="footer-copy">
+    &copy; 2025 Aadhar Properties. All rights reserved.<br/>
+    Built with ❤️ by <span>Varanasya AI</span>
+  </div>
+</footer>
+
+<!-- ─── FLOATING BUTTONS ─── -->
+<div class="float-btns" role="complementary" aria-label="Quick Contact">
+  <a href="tel:+919811563006" class="float-btn float-call" aria-label="Call Aadhar Properties">
+    <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.5 11.5 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1C10.56 21 3 13.44 3 4a1 1 0 011-1h3.5a1 1 0 011 1 11.5 11.5 0 00.57 3.6 1 1 0 01-.25 1.01l-2.2 2.18z"/>
+    </svg>
+    Call Us Now
+  </a>
+  <a href="https://wa.me/919811563006?text=Hi%20Mr.%20Akash%2C%20I%20am%20interested%20in%20a%20property%20in%20Greater%20Noida" target="_blank" class="float-btn float-wa" aria-label="WhatsApp Aadhar Properties">
+    <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    WhatsApp Us
+  </a>
+</div>
+
+<script>
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > window.innerHeight * 0.85);
+  });
+</script>
+</body>
+</html>
